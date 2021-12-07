@@ -15,22 +15,21 @@
 		<nav class="nav">
 			<a href="/dojos/new" class="btn btn-primary mb-3 me-3">New Dojo</a>
 		</nav>
-		<table class="table table-primary table-hovor table-striped">
+		<table class="table table-primary table-hovor table-striped col-3">
 			<thead>
 				<tr>
 					<th>Name</th>
-					<th>Action</th>
 				</tr>
 			</thead>
 			<tbody>
 			<c:forEach items="${Dojos}" var="dojo">
 				<tr>
-					<td><c:out value="${dojo.name}"/></td>
-					<td><a href="/Ninja/new">New Ninja</a></td>
+					<td><a href="/dojo/${dojo.id}"><c:out value="${dojo.name}"/></a></td>
 				</tr>
 			</c:forEach>
 			</tbody>
 		</table>
+		<a href="/ninja/new" class="btn btn-success">Add Ninja</a>
 	</div>
 </body>
 </html>

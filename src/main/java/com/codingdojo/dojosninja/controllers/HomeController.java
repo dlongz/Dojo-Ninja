@@ -8,9 +8,11 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.codingdojo.dojosninja.models.Dojo;
+import com.codingdojo.dojosninja.models.Ninja;
 import com.codingdojo.dojosninja.services.DojoService;
 import com.codingdojo.dojosninja.services.NinjaService;
 
@@ -43,4 +45,29 @@ public class HomeController {
 			return "redirect:/";
 		}
 	}
+	
+	@GetMapping("/ninja/new")
+	public String ninjaForm(Model model, @ModelAttribute("ninjaForm") Ninja ninja) {
+		model.addAttribute("allDojos", this.dojoService.AllDojos());    
+		return "ninjaForm.jsp";
+	}
+	
+	@PostMapping("/ninja/new")
+	public String createNinja(@Valid @ModelAttribute("ninjaForm") Ninja ninja, BindingResult result, Model model) {
+		if (result.hasErrors()) {
+			model.addAttribute("allDojos", this.dojoService.AllDojos());
+			return "ninjaForm.jsp";
+		} else {
+			this.ninjaService.createNinja(ninja);
+			return "redirect:/dojo/" + ninja.getDojo().getId();
+		}
+	}
+	
+	@GetMapping("/dojo/{id}")
+	public String showDojo(@PathVariable("id") Long id, Model model, @ModelAttribute("ninjaForm") Ninja ninja) {
+		model.addAttribute("dojo", this.dojoService.findDojo(id));
+		return "/showDojo.jsp";
+	}
+	
+	
 }

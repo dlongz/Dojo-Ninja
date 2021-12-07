@@ -41,6 +41,14 @@ public class Ninja {
 	@JoinColumn(name="dojo_id")
 	private Dojo dojo;
 	
+	public Dojo getDojo() {
+		return dojo;
+	}
+
+	public void setDojo(Dojo dojo) {
+		this.dojo = dojo;
+	}
+
 	public Ninja() {}
 
 	public Long getId() {

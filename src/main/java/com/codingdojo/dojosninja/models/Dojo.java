@@ -37,6 +37,14 @@ public class Dojo {
 		return id;
 	}
 
+	public List<Ninja> getNinja() {
+		return ninja;
+	}
+
+	public void setNinja(List<Ninja> ninja) {
+		this.ninja = ninja;
+	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
